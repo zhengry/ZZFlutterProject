@@ -27,13 +27,15 @@ class _StreamBodyState extends State<StreamBody> {
   int _currentStreamCount = 0;
   StreamController<String> _streamController;//流控制器
   StreamSubscription _subscription;//订阅者
+  StreamSink _dataSink;
   @override
   void initState() {
     super.initState();
-    _streamController = StreamController<String>();
+    _streamController = StreamController<String>.broadcast();
+    _dataSink = _streamController.sink;
     _subscription = _streamController.stream.listen(onData, onDone: onDone);
+    _subscription = _streamController.stream.listen(onData2);//多个订阅
   }
-
   
 
   //获取到数据后调用
@@ -41,6 +43,9 @@ class _StreamBodyState extends State<StreamBody> {
     setState(() {
       _dataValue = data;
     });
+  }
+  void onData2(String data) {
+    print("获取到的订阅数据是:$data");
   }
 
   void onError(Error error) {
@@ -53,7 +58,8 @@ class _StreamBodyState extends State<StreamBody> {
 // 添加数据
   void _addData() async {
     String data = await fetchData();
-    _streamController.add(data);
+    // _streamController.add(data);//使用流控制器添加数据
+    _dataSink.add(data);//使用StreamSink添加数据
   }
 // 恢复订阅
   void _resumeSubcription() {
