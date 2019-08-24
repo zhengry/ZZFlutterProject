@@ -11,6 +11,7 @@ import '../demos/datatable.dart';
 import '../demos/step.dart';
 import '../demos/add_count.dart';
 import '../demos/stream_demo.dart';
+import '../demos/rxdart/rxdart_page.dart';
 
 final routes = {
     "/":(context)=>Tabs(),
@@ -25,6 +26,7 @@ final routes = {
     "/step":(context)=>StepperPage(),
     "/add":(context)=>AddCountPage(),
     "/stream":(context)=>StreamPage(),
+    "/rxdart":(context)=>RxDartPage(),
 };
 
 var onGenerateRoute = (RouteSettings settings){

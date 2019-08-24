@@ -62,6 +62,12 @@ class _HistoryPageState extends State<HistoryPage> {
                 Navigator.of(context).pushNamed("/stream");
               },
             ),
+            ListTile(
+              title: Text("rxdart"),
+              onTap: (){
+                Navigator.of(context).pushNamed("/rxdart");
+              },
+            ),
           ],
         ),
       ),
