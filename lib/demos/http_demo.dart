@@ -41,6 +41,15 @@ class _HttpPageBodyState extends State<HttpPageBody> {
     return pictures.result;
   }
 
+  Widget _channelView(Channellist channel){
+    return Row(
+      children: <Widget>[
+        // CircleAvatar(backgroundImage: NetworkImage(channel.thumb ?? "https://c-ssl.duitang.com/uploads/item/201606/20/20160620104244_vZEnj.jpeg")),
+        Text(channel.name),   
+      ],
+    );
+  }
+
   Widget _item(String title,List<Channellist> datas,bool isExpansion){
     return ExpansionTile(
       title: Text(title,
@@ -48,21 +57,7 @@ class _HttpPageBodyState extends State<HttpPageBody> {
           fontSize:18
         )
       ),
-      children: <Widget>[
-        Container(
-          height: 100.0 * datas.length,
-          child: ListView.builder(
-          itemCount: datas.length,
-          itemBuilder: (context, index) {
-            Channellist model = datas[index];
-            return ListTile(
-              title: Text(model.name),
-              // leading: model.thumb != null ? CircleAvatar(backgroundImage: NetworkImage(model.thumb)) : null,
-            );
-          },
-        ),
-        )
-      ],
+      children: datas.map((channel)=>_channelView(channel)).toList(),
       initiallyExpanded: isExpansion,
       onExpansionChanged: (bool isExpansion){
   
