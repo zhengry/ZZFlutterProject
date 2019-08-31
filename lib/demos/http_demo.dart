@@ -1,9 +1,8 @@
 import 'dart:convert' as convert;
 import 'dart:core';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
+import 'package:scoped_model/scoped_model.dart';
 
 class HttpPage extends StatelessWidget {
   const HttpPage({Key key}) : super(key: key);
@@ -27,21 +26,49 @@ class HttpPageBody extends StatefulWidget {
 
 class _HttpPageBodyState extends State<HttpPageBody> {
 
-  // List _pictureList = List<Channellist>();
-
   @override
   void initState() {
     super.initState();
     _fetchList();
-    // jsonTest();
+
   }
 
   // 获取列表数据
-  Future <List<Channellist>> _fetchList() async {
+  Future <List<Result>> _fetchList() async {
     final response = await http.get("https://api.apiopen.top/musicBroadcasting");
     final json = convert.json.decode(response.body);
     final pictures = MusicInfo.fromJson(json);
-    return pictures.result.first.channellist;
+    return pictures.result;
+  }
+
+  Widget _item(String title,List<Channellist> datas,bool isExpansion){
+    return ExpansionTile(
+      title: Text(title,
+        style:TextStyle(
+          fontSize:18
+        )
+      ),
+      children: <Widget>[
+        Container(
+          height: 100.0 * datas.length,
+          child: ListView.builder(
+          itemCount: datas.length,
+          itemBuilder: (context, index) {
+            Channellist model = datas[index];
+            return ListTile(
+              title: Text(model.name),
+              // leading: model.thumb != null ? CircleAvatar(backgroundImage: NetworkImage(model.thumb)) : null,
+            );
+          },
+        ),
+        )
+      ],
+      initiallyExpanded: isExpansion,
+      onExpansionChanged: (bool isExpansion){
+  
+      },
+    );
+
   }
 
   @override
@@ -50,14 +77,18 @@ class _HttpPageBodyState extends State<HttpPageBody> {
     return FutureBuilder(
       future: _fetchList(),
       builder: (context, snapshot){
+        final list = snapshot.data as List<Result>;
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: Text("loading"),
+          );
+        }
+
         return ListView.builder(
-          itemCount: snapshot.data.length,
-          itemBuilder: (context, index) {
-            Channellist model = snapshot.data[index];
-            return ListTile(
-              title: Text(model.name),
-              leading: Image.network(model.thumb),
-            );
+          itemCount: list.length,
+          itemBuilder: (BuildContext context,int index){
+            final model = list[index];
+            return _item(model.title, model.channellist,false);
           },
         );
       },
@@ -65,6 +96,8 @@ class _HttpPageBodyState extends State<HttpPageBody> {
     
   }
 }
+
+
 
 class MusicInfo {
   int code;
