@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app/demos/dio_page.dart';
-import '../user/userInfo.dart';
-import '../setting/setting.dart';
+import '../demos/userInfo.dart';
+import '../demos/setting.dart';
 import '../tabs/tab.dart';
-import '../login/login.dart';
+import '../demos/login.dart';
 import '../demos/buttons.dart';
 import '../demos/dialog.dart';
 import '../demos/expansionPanel.dart';
@@ -12,7 +12,7 @@ import '../demos/datatable.dart';
 import '../demos/step.dart';
 import '../demos/add_count.dart';
 import '../demos/stream_demo.dart';
-import '../demos/rxdart/rxdart_page.dart';
+import '../demos/rxdart_page.dart';
 import '../demos/http_demo.dart';
 
 final routes = {
