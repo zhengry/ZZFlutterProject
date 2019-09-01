@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_app/demos/dio_page.dart';
 import '../user/userInfo.dart';
 import '../setting/setting.dart';
 import '../tabs/tab.dart';
@@ -29,6 +30,7 @@ final routes = {
     "/stream":(context)=>StreamPage(),
     "/rxdart":(context)=>RxDartPage(),
     "/http":(context)=>HttpPage(),
+    "/dio":(context)=>DioPage(),
 };
 
 var onGenerateRoute = (RouteSettings settings){

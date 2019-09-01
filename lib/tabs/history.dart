@@ -74,6 +74,12 @@ class _HistoryPageState extends State<HistoryPage> {
                 Navigator.of(context).pushNamed("/http");
               },
             ),
+            ListTile(
+              title: Text("dio请求"),
+              onTap: (){
+                Navigator.of(context).pushNamed("/dio");
+              },
+            ),
           ],
         ),
       ),
