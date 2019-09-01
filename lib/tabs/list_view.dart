@@ -8,7 +8,7 @@ class ListViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: Text("我的计划"),),
+      appBar: AppBar(title: Text("GridView"),),
       body: GridViewBuilderDemo(),
     );
   }

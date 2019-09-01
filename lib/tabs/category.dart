@@ -13,7 +13,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("演示列表"),
+        title: Text("功能列表"),
       ),
       body: Container(
         alignment: Alignment.center,

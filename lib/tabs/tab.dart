@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../tabs/home.dart';
 import '../tabs/mine.dart';
-import '../tabs/history.dart';
+import '../tabs/category.dart';
 import '../tabs/list_view.dart';
 
 
@@ -32,8 +32,8 @@ class _TabsState extends State<Tabs> {
             title: Text("首页"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            title: Text("历史记录"),
+            icon: Icon(Icons.category),
+            title: Text("功能列表"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
@@ -41,7 +41,7 @@ class _TabsState extends State<Tabs> {
           ),  
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
-            title: Text("计划列表")
+            title: Text("Grid视图")
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
