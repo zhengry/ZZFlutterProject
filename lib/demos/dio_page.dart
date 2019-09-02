@@ -43,6 +43,18 @@ class DioPageBody extends StatelessWidget {
             child: Text("加载中..."),
           );
         }
+        // return GridView.count(
+        //   crossAxisCount: 3,//交叉轴方向Item个数
+        //   crossAxisSpacing: 10,
+        //   mainAxisSpacing: 12,
+        //   scrollDirection: Axis.vertical,
+        //   children: (snapshot.data as List).map((item){  
+        //         return Container(
+        //           height: 20,
+        //           child: Text(item["name"]),
+        //         );
+        //       }).toList(),
+        // );
         return Text(snapshot.data.toString(),
             maxLines: 20, overflow: TextOverflow.ellipsis);
       },

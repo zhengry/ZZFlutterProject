@@ -3,7 +3,7 @@ import '../tabs/home.dart';
 import '../tabs/mine.dart';
 import '../tabs/category.dart';
 import '../tabs/list_view.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Tabs extends StatefulWidget {
   Tabs({Key key}) : super(key: key);
@@ -15,13 +15,13 @@ class _TabsState extends State<Tabs> {
   var _currentIndex = 0;
   var pages = [HomePage(),
               HistoryPage(),
-              
               ListViewPage(),
               MinePage()];
 
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     return Scaffold(
 
       bottomNavigationBar: BottomNavigationBar(
