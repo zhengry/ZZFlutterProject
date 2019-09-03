@@ -46,6 +46,9 @@ class _HttpPageBodyState extends State<HttpPageBody> {
       child: ListTile(
         leading: Image.network(((channel.thumb != null ) ? channel.thumb : channel.avatar)?? "https://c-ssl.duitang.com/uploads/item/201606/20/20160620104244_vZEnj.jpeg"),
         title: Text(channel.name),
+        onTap: (){
+          Navigator.of(context).pushNamed("/channel_detail");
+        },
       ),
     );
   }
@@ -91,8 +94,6 @@ class _HttpPageBodyState extends State<HttpPageBody> {
     
   }
 }
-
-
 
 class MusicInfo {
   int code;

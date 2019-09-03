@@ -14,6 +14,7 @@ import '../demos/add_count.dart';
 import '../demos/stream_demo.dart';
 import '../demos/rxdart_page.dart';
 import '../demos/http_demo.dart';
+import '../demos/channel_detail.dart';
 
 final routes = {
     "/":(context)=>Tabs(),
@@ -31,6 +32,7 @@ final routes = {
     "/rxdart":(context)=>RxDartPage(),
     "/http":(context)=>HttpPage(),
     "/dio":(context)=>DioPage(),
+    "/channel_detail":(context)=>ChannelDetailPage(),
 };
 
 var onGenerateRoute = (RouteSettings settings){
