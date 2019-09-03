@@ -8,23 +8,22 @@ class DioPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("dio网络请求")),
-        body: Column(
-          children: <Widget>[DioPageBody()],
-        ));
+        appBar: AppBar(title: Text("dio网络请求")), 
+        body: DioPageBody());
   }
 }
 
 class DioPageBody extends StatelessWidget {
   const DioPageBody({Key key}) : super(key: key);
 
-  Future<List> requestForData() async {
+  Future<List<Map>> requestForData() async {
     try {
       Dio dio = Dio();
-      Response response =
-          await dio.get("https://api.apiopen.top/musicBroadcasting");
+      Response response = await dio.get(
+          "https://api.apiopen.top/musicRankingsDetails",
+          queryParameters: {"type": 1});
       if (response.statusCode == 200) {
-        return response.data["result"][0]["channellist"];
+        return (response.data["result"] as List).cast();
       } else {
         throw Error();
       }
@@ -43,21 +42,47 @@ class DioPageBody extends StatelessWidget {
             child: Text("加载中..."),
           );
         }
-        // return GridView.count(
-        //   crossAxisCount: 3,//交叉轴方向Item个数
-        //   crossAxisSpacing: 10,
-        //   mainAxisSpacing: 12,
-        //   scrollDirection: Axis.vertical,
-        //   children: (snapshot.data as List).map((item){  
-        //         return Container(
-        //           height: 20,
-        //           child: Text(item["name"]),
-        //         );
-        //       }).toList(),
-        // );
-        return Text(snapshot.data.toString(),
-            maxLines: 20, overflow: TextOverflow.ellipsis);
+        return ItemListView(snapshot.data);
       },
+    );
+  }
+}
+
+class ItemListView extends StatelessWidget {
+  final List<Map> _itemList;
+  ItemListView(this._itemList);
+
+  Widget _gridItemBuider(BuildContext context, int index) {
+    return InkWell(
+      onTap: () {},
+      child: Stack(
+        children: <Widget>[
+          Image.network(_itemList[index]["pic_radio"]),
+          Container(
+            padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+            width: double.infinity,
+            color: Color.fromARGB(50, 1, 1, 1),
+              child: Text(_itemList[index]["title"],
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ))),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: EdgeInsets.all(10),
+      itemCount: _itemList.length,
+      itemBuilder: _gridItemBuider,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+      ),
     );
   }
 }
