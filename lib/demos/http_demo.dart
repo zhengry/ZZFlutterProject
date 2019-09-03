@@ -2,7 +2,6 @@ import 'dart:convert' as convert;
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:scoped_model/scoped_model.dart';
 
 class HttpPage extends StatelessWidget {
   const HttpPage({Key key}) : super(key: key);
@@ -42,11 +41,12 @@ class _HttpPageBodyState extends State<HttpPageBody> {
   }
 
   Widget _channelView(Channellist channel){
-    return Row(
-      children: <Widget>[
-        // CircleAvatar(backgroundImage: NetworkImage(channel.thumb ?? "https://c-ssl.duitang.com/uploads/item/201606/20/20160620104244_vZEnj.jpeg")),
-        Text(channel.name),   
-      ],
+    return Container(
+      padding: EdgeInsets.only(top: 5),
+      child: ListTile(
+        leading: Image.network(((channel.thumb != null ) ? channel.thumb : channel.avatar)?? "https://c-ssl.duitang.com/uploads/item/201606/20/20160620104244_vZEnj.jpeg"),
+        title: Text(channel.name),
+      ),
     );
   }
 
