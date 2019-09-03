@@ -14,7 +14,7 @@ class Tabs extends StatefulWidget {
 class _TabsState extends State<Tabs> {
   var _currentIndex = 0;
   var pages = [HomePage(),
-              HistoryPage(),
+              CategoryPage(),
               ListViewPage(),
               MinePage()];
 

@@ -69,10 +69,13 @@ class ChannelDetail extends StatelessWidget {
     if (item["artist"] == null) {
       return null;
     } 
-    return ListTile(
-        contentPadding: EdgeInsets.only(top: 5),
-        leading: Image.network(itemList[index]["thumb"]),
-        title: Text(itemList[index]["title"]),
-      );
+    return Card(
+      elevation: 0.5,
+      child: Row(
+        children: <Widget>[
+          Image.network(itemList[index]["thumb"]),
+          Text(itemList[index]["title"]),
+        ],
+      ));
   }
 }
