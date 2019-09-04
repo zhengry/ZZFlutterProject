@@ -1,4 +1,4 @@
-import 'dart:convert' as convert;
+import 'dart:convert' as JSON;
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -33,9 +33,9 @@ class _HttpPageBodyState extends State<HttpPageBody> {
   }
 
   // 获取列表数据
-  Future <List<Result>> _fetchList() async {
+  Future <List<MusicInfoResult>> _fetchList() async {
     final response = await http.get("https://api.apiopen.top/musicBroadcasting");
-    final json = convert.json.decode(response.body);
+    final json = JSON.jsonDecode(response.body);//convert.json.decode(response.body);
     final pictures = MusicInfo.fromJson(json);
     return pictures.result;
   }
@@ -75,7 +75,7 @@ class _HttpPageBodyState extends State<HttpPageBody> {
     return FutureBuilder(
       future: _fetchList(),
       builder: (context, snapshot){
-        final list = snapshot.data as List<Result>;
+        final list = snapshot.data as List<MusicInfoResult>;
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: Text("loading"),
@@ -98,7 +98,7 @@ class _HttpPageBodyState extends State<HttpPageBody> {
 class MusicInfo {
   int code;
   String message;
-  List<Result> result;
+  List<MusicInfoResult> result;
 
   MusicInfo({this.code, this.message, this.result});
 
@@ -106,9 +106,9 @@ class MusicInfo {
     code = json['code'];
     message = json['message'];
     if (json['result'] != null) {
-      result = new List<Result>();
+      result = new List<MusicInfoResult>();
       json['result'].forEach((v) {
-        result.add(new Result.fromJson(v));
+        result.add(new MusicInfoResult.fromJson(v));
       });
     }
   }
@@ -124,14 +124,14 @@ class MusicInfo {
   }
 }
 
-class Result {
+class MusicInfoResult {
   List<Channellist> channellist;
   String title;
   int cid;
 
-  Result({this.channellist, this.title, this.cid});
+  MusicInfoResult({this.channellist, this.title, this.cid});
 
-  Result.fromJson(Map<String, dynamic> json) {
+  MusicInfoResult.fromJson(Map<String, dynamic> json) {
     if (json['channellist'] != null) {
       channellist = new List<Channellist>();
       json['channellist'].forEach((v) {
