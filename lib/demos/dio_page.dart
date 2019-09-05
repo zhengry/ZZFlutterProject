@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'dart:async';
 
+import '../util/network.dart';
+
 class DioPage extends StatelessWidget {
   const DioPage({Key key}) : super(key: key);
 

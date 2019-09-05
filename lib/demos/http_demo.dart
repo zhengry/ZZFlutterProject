@@ -2,6 +2,7 @@ import 'dart:convert' as JSON;
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class HttpPage extends StatelessWidget {
   const HttpPage({Key key}) : super(key: key);
@@ -82,12 +83,15 @@ class _HttpPageBodyState extends State<HttpPageBody> {
           );
         }
 
-        return ListView.builder(
+        return EasyRefresh(
+          onRefresh: _fetchList,
+          child: ListView.builder(
           itemCount: list.length,
           itemBuilder: (BuildContext context,int index){
             final model = list[index];
             return _item(model.title, model.channellist,false);
           },
+        ),
         );
       },
     );
