@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_app/util/hud.dart';
 
 class CategoryPage extends StatefulWidget {
   CategoryPage({Key key}) : super(key: key);
@@ -78,6 +79,13 @@ class _CategoryPageState extends State<CategoryPage> {
               title: Text("dio请求"),
               onTap: (){
                 Navigator.of(context).pushNamed("/dio");
+              },
+            ),
+            ListTile(
+              title: Text("toast展示"),
+              onTap: (){
+                HUD.showMessage("测试一下toast展示");
+                // Navigator.of(context).pushNamed("/dio");
               },
             ),
           ],
