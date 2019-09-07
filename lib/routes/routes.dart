@@ -15,6 +15,7 @@ import '../demos/stream_demo.dart';
 import '../demos/rxdart_page.dart';
 import '../demos/http_demo.dart';
 import '../demos/channel_detail.dart';
+import '../demos/network_demo.dart';
 
 final routes = {
     "/":(context)=>Tabs(),
@@ -33,6 +34,7 @@ final routes = {
     "/http":(context)=>HttpPage(),
     "/dio":(context)=>DioPage(),
     "/channel_detail":(context)=>ChannelDetailPage(),
+    "/network_list":(context)=>NetworkRequestPage(),
 };
 
 var onGenerateRoute = (RouteSettings settings){

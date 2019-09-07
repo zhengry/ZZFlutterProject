@@ -77,17 +77,23 @@ class _CategoryPageState extends State<CategoryPage> {
             ),
             ListTile(
               title: Text("dio请求"),
-              onTap: (){
+              onTap: () {
                 Navigator.of(context).pushNamed("/dio");
+                
               },
             ),
             ListTile(
               title: Text("toast展示"),
               onTap: (){
-                HUD.showMessage("测试一下toast展示");
-                // Navigator.of(context).pushNamed("/dio");
+                HUD.showMessage("测试一下toast展示测试一下toast展示测试一下toast展示测试一下toast展示测试一下toast展示");
               },
             ),
+            ListTile(
+              title: Text("network封装请求测试"),
+              onTap: (){
+                Navigator.of(context).pushNamed("/network_list");
+              },
+            )
           ],
         ),
       ),
