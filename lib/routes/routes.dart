@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app/demos/dio_page.dart';
+import '../demos/tab_view.dart';
 import '../demos/userInfo.dart';
 import '../demos/setting.dart';
 import '../tabs/tab.dart';
@@ -35,6 +36,7 @@ final routes = {
     "/dio":(context)=>DioPage(),
     "/channel_detail":(context)=>ChannelDetailPage(),
     "/network_list":(context)=>NetworkRequestPage(),
+    "/tab_view":(context)=>TabViewPage(),
 };
 
 var onGenerateRoute = (RouteSettings settings){

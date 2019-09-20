@@ -1,178 +1,69 @@
+
+
 import 'package:flutter/material.dart';
-import '../model/post_data.dart';
 
 // import '../setting/setting.dart';
 
-class MinePage extends StatefulWidget {
-  MinePage({Key key}) : super(key: key);
+class MinePage extends StatelessWidget {
+  const MinePage({Key key}) : super(key: key);
 
-  _MinePageState createState() => _MinePageState();
-}
-
-class _MinePageState extends State<MinePage> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text("我的"),
-          elevation: 0.0,
-          bottom: TabBar(
-            unselectedLabelColor: Colors.black38,
-            indicatorColor: Colors.black54,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorWeight: 1.0,
-            tabs: <Widget>[
-              Tab(icon: Icon(Icons.search)),
-              Tab(icon: Icon(Icons.folder)),
-              Tab(icon: Icon(Icons.border_inner)),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: <Widget>[
-            InputViewDemo(),
-            SliverGridViewDemo(),
-            SliverListViewDemo()
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(title: Text("我的")),
+      body: Column(
+        children: <Widget>[
+          _userInfoWidget(),
+          _userOptionsWidget()
+        ],
       ),
     );
   }
-}
 
-class InputViewDemo extends StatefulWidget {
-  InputViewDemo({Key key}) : super(key: key);
-  
-  _InputViewDemoState createState() => _InputViewDemoState();
-}
-
-class _InputViewDemoState extends State<InputViewDemo> {
-  final inputController = TextEditingController();
-
-  @override
-  void dispose() {
-    inputController.dispose();
-    super.dispose();
-  }
-
-
-  @override
-  void initState() {
-    inputController.text = "userName";//设置初始值
-    // addListener的参数是个回调函数
-    inputController.addListener((){
-      debugPrint("input = ${inputController.text}");
-    });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _userInfoWidget() {
     return Container(
-        padding: EdgeInsets.all(12),
-        child: TextField(
-          decoration: InputDecoration(
-            icon: Icon(Icons.supervised_user_circle),//设置左边icon
-            labelText: "姓名",
-            // border:InputBorder.none,//无边框
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20))
-              ),//设置边框
-            hintText: "请输入您的姓名",//placeholder
-            filled: true,//是否填充背景色,默认灰色背景
-            fillColor: Colors.white60//背景色的填充颜色
+          padding: EdgeInsets.all(20),
+          
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(width: 10,color: Colors.black12)),
+            // color: Colors.red
           ),
-          // onChanged: (text){
-          //   debugPrint("输入的内容是$text");
-          // },
-          controller: inputController,
-          onSubmitted: (text){
-            debugPrint("提交了");
-          },
-        ),
-      );
-  }
-}
-
-class SliverGridViewDemo extends StatelessWidget {
-  const SliverGridViewDemo({Key key}) : super(key: key);
-
- 
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverPadding(//给SliverGrid添加内边距
-          padding: EdgeInsets.all(4),
-          sliver: SliverGridDemo(),
-        ),
-      ],
-    );
-  }
-}
-
-class SliverListViewDemo extends StatelessWidget {
-  const SliverListViewDemo({Key key}) : super(key: key); 
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverPadding(//给SliverGrid添加内边距
-          padding: EdgeInsets.all(4),
-          sliver: SliverListDemo(),
-        ),
-      ],
-    );
-  }
-}
-
-
-
-// SliverGrid 网格视图
-class SliverGridDemo extends StatelessWidget {
-  const SliverGridDemo({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8.0,
-            childAspectRatio: 0.7
-          ),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Container(
-                  child: Image.network(posts[index]["imageUrl"],
-                      fit: BoxFit.fill));
-            },
-            childCount: posts.length
+          child: Row(
+            
+            children: <Widget>[
+              ClipOval(
+                child: Image.network("https://c-ssl.duitang.com/uploads/item/201701/04/20170104180647_GJcfB.jpeg",width: 100,height: 100),
+                
+              ),
+              SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  
+                  Text("Baylee",style: TextStyle(fontSize: 28),),
+                  SizedBox(height: 12),
+                  Text("baylee.zry@foxmail.com")
+                ],
+              )
+            ],
           ),
         );
   }
-}
-
-//SliverList 列表视图
-class SliverListDemo extends StatelessWidget {
-  const SliverListDemo({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverList(
-
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Container(
-                  child: Image.network(posts[index]["imageUrl"],
-                      fit: BoxFit.fill));
-            },
-            childCount: posts.length
-          ),
-        );
+  Widget _userOptionsWidget() {
+    return Column(
+      children: <Widget>[
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text("设置"),
+          trailing: Icon(Icons.arrow_right),
+        ),
+        ListTile(
+          leading: Icon(Icons.message),
+          title: Text("消息"),
+          trailing: Icon(Icons.arrow_right),
+        )
+      ],
+    );
   }
 }
 

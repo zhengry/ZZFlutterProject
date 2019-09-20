@@ -16,9 +16,7 @@ class _CategoryPageState extends State<CategoryPage> {
       appBar: AppBar(
         title: Text("功能列表"),
       ),
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
+      body: ListView(
           children: <Widget>[
             ListTile(
               title: Text("按钮列表演示"),
@@ -93,10 +91,15 @@ class _CategoryPageState extends State<CategoryPage> {
               onTap: (){
                 Navigator.of(context).pushNamed("/network_list");
               },
+            ),
+            ListTile(
+              title: Text("tabView"),
+              onTap: (){
+                Navigator.of(context).pushNamed("/tab_view");
+              },
             )
           ],
-        ),
-      ),
+        )
     );
   }
 }
